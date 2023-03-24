@@ -1,3 +1,4 @@
+import { TodoComponent } from "./Components/Todo-component";
 import "./App.css";
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
     <div className="App">
       <h1>Oscar Anillo</h1>
       <p>Fullstack Developer</p>
+      <TodoComponent />
     </div>
   );
 }
