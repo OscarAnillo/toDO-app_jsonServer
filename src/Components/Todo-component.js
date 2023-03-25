@@ -27,7 +27,9 @@ export const TodoComponent = () => {
     }
     let newTodo = { toDo: userInput };
     axios
-      .post("http://localhost:3005/posts", newTodo)
+      .post("http://localhost:3005/posts", newTodo, {
+        "Content-Type": "application/json",
+      })
       .then((res) => {
         setDataList(dataList.concat(res.data));
         setUserInput("");
