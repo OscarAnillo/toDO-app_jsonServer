@@ -15,19 +15,19 @@
 .div-todo {
   margin: 3em auto 0 auto;
   text-align: left;
-  width: 70%;
+  width: 90%;
 }
 .div-todo form {
   border: 1px solid #eee;
   border-radius: 6px;
   padding: 1em;
-  width: 50%;
+  width: 80%;
   margin: 1em;
 }
 .div-todo form input {
   border: 1px solid #eee;
   border-radius: 6px;
-  padding: 1em;
+  padding: 1em 0 1em 1em;
   margin-bottom: 1em;
   width: 95%;
 }
@@ -54,11 +54,38 @@
   transition: .6s;
 }
 .div-map {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding-left: 1em;
 }
 .div-map li {
   border-bottom: 1px solid #eee;
   color: rgb(255, 102, 0);
+  margin: .5em 0;
   letter-spacing: 1px;
   text-shadow: 1px 1px 1px #000;
+}
+.div-map button {
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+@media(min-width: 760px){
+  
+  /* To do component */
+  .div-todo {
+    width: 90%;
+    max-width: 800px;
+  }
+  .div-todo form {
+    width: 70%;
+    margin: 1em;
+  }
+  .div-map li {
+    margin: 1em 0;
+    letter-spacing: 3px;
+  } 
 }

@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import axios from "axios";
 
 export const TodoComponent = () => {
   const [userInput, setUserInput] = useState("");
@@ -8,14 +10,37 @@ export const TodoComponent = () => {
     setUserInput(e.target.value);
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3005/posts")
+      .then((res) => {
+        setDataList(res.data);
+      })
+      .catch(console.log);
+  }, []);
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (!userInput) {
-      alert("Please a to do activity");
+      alert("Please add a to do activity");
       return;
     }
-    setDataList([...dataList, { id: dataList.length, toDo: userInput }]);
-    setUserInput("");
+    let newTodo = { toDo: userInput };
+    axios
+      .post("http://localhost:3005/posts", newTodo)
+      .then((res) => {
+        setDataList(dataList.concat(res.data));
+        setUserInput("");
+      })
+      .catch(console.log);
+  };
+
+  const clickHandlerDelete = (id) => {
+    axios.delete(`http://localhost:3005/posts/${id}`).then((res) => {
+      console.log(res.data);
+      const todos = dataList.filter((todo) => todo.id !== id);
+      setDataList(todos);
+    });
   };
 
   return (
@@ -32,6 +57,7 @@ export const TodoComponent = () => {
       {dataList.map((item) => (
         <div key={item.id} className="div-map">
           <li>{item.toDo}</li>
+          <button onClick={() => clickHandlerDelete(item.id)}>x</button>
         </div>
       ))}
     </div>
